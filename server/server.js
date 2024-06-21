@@ -49,6 +49,16 @@ app.get('/diff', async (req, res) => {
   }
 });
 
+app.get('/commits', async (req, res) => {
+  try {
+    const log = await git.log();
+    const hashes = log.all.map(commit => commit.hash);
+    res.json(hashes);
+  } catch (err) {
+    res.status(500).send('Failed to get commit hashes');
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -12,7 +12,7 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ baseCommit, targetCommit }) => 
   useEffect(() => {
     const fetchDiff = async () => {
       try {
-        const response = await fetch(`http://localhost:5173/diff?baseCommit=${baseCommit}&targetCommit=${targetCommit}`);
+        const response = await fetch(`http://localhost:3000/diff?baseCommit=${baseCommit}&targetCommit=${targetCommit}`);
         if (response.ok) {
           const diffText = await response.text();
           setDiff(diffText);
