@@ -1,9 +1,13 @@
-// server/server.js
-const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
-const simpleGit = require('simple-git');
+import express from 'express';
+import bodyParser from 'body-parser';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import simpleGit from 'simple-git';
+
+// プロジェクトのディレクトリを取得
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const git = simpleGit();
