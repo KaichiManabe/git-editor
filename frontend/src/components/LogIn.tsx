@@ -20,7 +20,7 @@ export default function LogIn() {
 
   return (
     <div>
-      <h2>Sign In</h2>
+      <h2>Log In</h2>
       <input
         type="email"
         value={email}
