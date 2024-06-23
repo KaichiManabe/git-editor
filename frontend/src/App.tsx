@@ -1,14 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Quillのスタイルシートをインポート
+import './App.css'; // 必要ならばスタイルシートをインポート
+
 // Vite はトランスパイル時に import.meta.env のプロパティを VITE_ から始まる環境変数に置換する
 // これを利用して本番環境と開発環境で Fetch API のリクエスト先を切り替えられる
 // 参考: https://ja.vitejs.dev/guide/env-and-mode.html
-// const getMessagesApi = `${import.meta.env.VITE_API_ENDPOINT}/messages`;
 const postSendApi = `${import.meta.env.VITE_API_ENDPOINT}/documents`;
 
 export default function App() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [authorId, setAuthorId] = useState(1);
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [authorId, setAuthorId] = useState<number>(1);
 
   const handleSave = async () => {
     try {
@@ -33,9 +36,10 @@ export default function App() {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
       />
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+      {/* ReactQuillを使用してリッチテキストエディタを追加 */}
+      <ReactQuill 
+        value={content} 
+        onChange={setContent} 
         placeholder="Content"
       />
       <input
