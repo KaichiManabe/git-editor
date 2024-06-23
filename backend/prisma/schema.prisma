@@ -16,7 +16,7 @@ model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
-  documents Document[]
+  // documents Document[]
 }
 
 model Document {
@@ -24,7 +24,7 @@ model Document {
   title      String
   content    String
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  author     User     @relation(fields: [authorId], references: [id])
+  // updatedAt  DateTime @updatedAt
+  // author     User     @relation(fields: [authorId], references: [id])
   authorId   Int
 }

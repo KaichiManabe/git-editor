@@ -38,6 +38,12 @@ export default function App() {
         onChange={(e) => setContent(e.target.value)}
         placeholder="Content"
       />
+      <input
+        type="number"
+        value={authorId}
+        onChange={(e) => setAuthorId(Number(e.target.value))}
+        placeholder="Author ID"
+      />
       <button onClick={handleSave}>Save</button>
     </div>
   );

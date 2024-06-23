@@ -18,14 +18,13 @@ app.post('/documents', async (req, res) => {
       data: {
         title,
         content,
-        author: {
-          connect: { id: authorId }
-        }
+        authorId,
       }
     });
+    console.log('dddddddfっだsふぁ', document);
     response.send(document);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Errorあああああ' });
   }
 });
 
