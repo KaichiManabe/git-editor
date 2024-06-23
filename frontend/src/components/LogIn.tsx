@@ -8,35 +8,22 @@ export default function LogIn() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSignIn = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+  const handleGoogleSignIn = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
     });
     if (error) {
       setError(error.message);
     } else {
-      console.log('User signed in:', data.user);
-      navigate('/home');
+      console.log('User signed in:', data);
+      await navigate('/home');
     }
   };
 
   return (
     <div>
       <h2>Log In</h2>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button onClick={handleSignIn}>Log In</button>
+      <button onClick={handleGoogleSignIn}>Sign Up with Google</button>
       {error && <p>{error}</p>}
     </div>
   );
