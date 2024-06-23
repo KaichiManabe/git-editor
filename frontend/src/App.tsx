@@ -1,43 +1,39 @@
-// src/App.tsx
-import React, { useEffect, useState } from 'react';
-import { getDocuments, createDocument } from './api';
+import React, { useEffect, useState } from "react";
 
-const App: React.FC = () => {
-  const [documents, setDocuments] = useState([]);
-  const [content, setContent] = useState('');
+export default function App() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [authorId, setAuthorId] = useState(1);
 
-  useEffect(() => {
-    const fetchDocuments = async () => {
-      const data = await getDocuments();
-      setDocuments(data);
-    };
-
-    fetchDocuments();
-  }, []);
-
-  const handleCreateDocument = async () => {
-    if (content.trim()) {
-      const newDoc = await createDocument(content);
-      setDocuments([...documents, newDoc]);
-      setContent('');
+  const handleSave = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/documents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, content, authorId }),
+      });
+      const data = await response.json();
+      console.log("Document saved:", data);
+    } catch (error) {
+      console.error("Error saving document:", error);
     }
   };
 
   return (
-    <div>
-      <h1>Documents</h1>
-      <ul>
-        {documents.map((doc) => (
-          <li key={doc.id}>{doc.content}</li>
-        ))}
-      </ul>
+    <div className="App">
+      <h1>Document Editor</h1>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
+      />
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
+        placeholder="Content"
       />
-      <button onClick={handleCreateDocument}>Create Document</button>
+      <button onClick={handleSave}>Save</button>
     </div>
   );
-};
-
-export default App;
+}
