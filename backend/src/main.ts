@@ -1,5 +1,5 @@
-import express, { response } from 'express';
-import cors from 'cors';
+import express from "express";
+import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -8,9 +8,14 @@ const port = process.env.PORT || 3000;
 
 // ミドルウェアの設定
 app.use(cors({ origin: process.env.WEB_ORIGIN }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post('/documents', async (req, res) => {
+app.get("/", async (req, res) => {
+  res.json("Hello, World!");
+});
+
+app.post("/documents", async (req, res) => {
   const { title, content, authorId } = req.body;
 
   try {
@@ -19,15 +24,16 @@ app.post('/documents', async (req, res) => {
         title,
         content,
         authorId,
-      }
+      },
     });
-    response.send(document);
+    res.send(document);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Errorあああああ' });
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 // サーバーの起動
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
