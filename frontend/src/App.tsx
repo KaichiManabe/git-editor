@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+// Vite はトランスパイル時に import.meta.env のプロパティを VITE_ から始まる環境変数に置換する
+// これを利用して本番環境と開発環境で Fetch API のリクエスト先を切り替えられる
+// 参考: https://ja.vitejs.dev/guide/env-and-mode.html
+// const getMessagesApi = `${import.meta.env.VITE_API_ENDPOINT}/messages`;
+const postSendApi = `${import.meta.env.VITE_API_ENDPOINT}/documents`;
 
 export default function App() {
   const [title, setTitle] = useState("");
@@ -7,7 +12,7 @@ export default function App() {
 
   const handleSave = async () => {
     try {
-      const response = await fetch("http://localhost:3000/documents", {
+      const response = await fetch(postSendApi, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, content, authorId }),
