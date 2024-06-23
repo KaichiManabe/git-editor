@@ -21,7 +21,6 @@ app.post('/documents', async (req, res) => {
         authorId,
       }
     });
-    console.log('dddddddfっだsふぁ', document);
     response.send(document);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Errorあああああ' });

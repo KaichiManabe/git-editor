@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Quillのスタイルシートをインポート
-import './App.css'; // 必要ならばスタイルシートをインポート
+import { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Quillのスタイルシートをインポート
+import "./App.css"; // 必要ならばスタイルシートをインポート
 
 // Vite はトランスパイル時に import.meta.env のプロパティを VITE_ から始まる環境変数に置換する
 // これを利用して本番環境と開発環境で Fetch API のリクエスト先を切り替えられる
@@ -36,12 +36,7 @@ export default function App() {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
       />
-      {/* ReactQuillを使用してリッチテキストエディタを追加 */}
-      <ReactQuill 
-        value={content} 
-        onChange={setContent} 
-        placeholder="Content"
-      />
+      <ReactQuill value={content} onChange={setContent} placeholder="Content" />
       <input
         type="number"
         value={authorId}
