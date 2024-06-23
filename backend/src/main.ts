@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import cors from 'cors';
 import { PrismaClient } from "@prisma/client";
 
@@ -23,13 +23,13 @@ app.post('/documents', async (req, res) => {
         }
       }
     });
-    res.status(201).json(document);
+    response.send(document);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
 // サーバーの起動
-app.listen(port, () => {
+app.listen(3000, () => {
   console.log(`Server is running on port ${port}`);
 });
