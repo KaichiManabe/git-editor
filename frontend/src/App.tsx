@@ -36,7 +36,7 @@ export default function App() {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
       />
-      <ReactQuill value={content} onChange={setContent} placeholder="Content" />
+      <ReactQuill value={content} onChange={setContent} placeholder="Content" style={{ height: '400px', width: '100%' }} />
       <input
         type="number"
         value={authorId}
